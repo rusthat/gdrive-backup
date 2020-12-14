@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28698390-3caf-455a-bba4-7b165ff968c2" name="Default Changelist" comment="Implemented argument to Config parsing.&#10;Implemented google drive api libs.&#10;srcFolder gets archived with tar and compressed with gunzip and correctly named with descriptor and time. Errors should be handled if occuring.">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gdrive-backup.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gdrive-backup.iml" afterDir="false" />
+    <list default="true" id="28698390-3caf-455a-bba4-7b165ff968c2" name="Default Changelist" comment="Implemented argument to Config parsing.&#10;Implemented google drive api libs.&#10;Implemented parsing credentials.json.&#10;Implemented OAuth2 via provided link.&#10;srcFolder gets archived with tar and compressed with gunzip and correctly named with descriptor and time. Errors should be handled if occuring.&#10;Implemented auth, connect, createdir and fileupload to google drive. First release candidate.">
+      <change afterPath="$PROJECT_DIR$/LICENCE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +67,7 @@
     <configuration name="go build gdrive-backup" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gdrive-backup" />
       <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-o bin/gdrive-backup" />
       <parameters value="--src ./testsrc --dest /test-backup --tag mytag" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -87,6 +83,7 @@
       <filePath value="$PROJECT_DIR$/main.go" />
       <package value="gdrive-backup" />
       <directory value="$PROJECT_DIR$" />
+      <output_directory value="bin/" />
       <method v="2" />
     </configuration>
     <list>
@@ -105,7 +102,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented argument to Config parsing.&#10;Implemented google drive api libs.&#10;srcFolder gets archived with tar and compressed with gunzip and correctly named with descriptor and time. Errors should be handled if occuring." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented argument to Config parsing.&#10;Implemented google drive api libs.&#10;srcFolder gets archived with tar and compressed with gunzip and correctly named with descriptor and time. Errors should be handled if occuring." />
+    <MESSAGE value="Implemented argument to Config parsing.&#10;Implemented google drive api libs.&#10;Implemented parsing credentials.json.&#10;Implemented OAuth2 via provided link.&#10;srcFolder gets archived with tar and compressed with gunzip and correctly named with descriptor and time. Errors should be handled if occuring.&#10;Implemented auth, connect, createdir and fileupload to google drive. First release candidate." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented argument to Config parsing.&#10;Implemented google drive api libs.&#10;Implemented parsing credentials.json.&#10;Implemented OAuth2 via provided link.&#10;srcFolder gets archived with tar and compressed with gunzip and correctly named with descriptor and time. Errors should be handled if occuring.&#10;Implemented auth, connect, createdir and fileupload to google drive. First release candidate." />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
