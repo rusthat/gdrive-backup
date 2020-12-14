@@ -7,44 +7,36 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 var Conf Config
-var Flags *flag.FlagSet
 
 func init() {
-	Flags = flag.NewFlagSet("Default Config", flag.ContinueOnError)
-
 	Conf = parseArguments()
 }
 
 func main() {
 	fmt.Printf(
-		"Args: %s %s %s %s",
-		*Conf.ApiKey,
-		*Conf.Source,
-		*Conf.Destination,
-		*Conf.Descriptor,
+		"Args: %s %s %s %s\n",
+		Conf.ApiKey,
+		Conf.Source,
+		Conf.Destination,
+		Conf.Descriptor,
 	)
 
-	//var tarFile = srcToTar(SrcFolder, )
-	//fmt.Print(fmt.Sprintf("%s %s %s %s %s", string(*ApiKey), string(*SrcFolder), string(*DestFolder), string(*archiveType), string(*tag)))
-	//var cwd = os.Args[0:]
-	//var options = os.Args[1:]
-	//var source = os.Args[2:]
-	//fmt.Sprint("os.Args %s\nos.Args[0:] %s\nos.Args[1:] %s\nos.Args[2:] %s\nos.Args[3:] %s\n", os.Args, os.Args[0:], os.Args[1:], os.Args[2:], os.Args[3:])
-	//fmt.Print("gdrive-backup utility.")
-	//if len(flag.Arg(0)) == len("") {
-	//	printHelp()
-	//}
+	var tarFile = srcToTar(Conf.Source)
+	tarFile.Close()
+	fmt.Println(fmt.Sprintf("Temporary file: %s", tarFile.Name()))
 }
 
 func srcToTar(src string) os.File {
-	file, err := os.Create("./tmp.tar")
+	dt := time.Now()
+	tmpName := fmt.Sprintf("./tmp_" + Conf.Descriptor + dt.Format("02-01-2006_15:04:05") + ".tar.gz")
+	file, err := os.Create(tmpName)
 	if err != nil {
 		processError(err)
 	}
@@ -53,40 +45,37 @@ func srcToTar(src string) os.File {
 	if err != nil {
 		processError(err)
 	}
-
+	writer.Flush()
+	file.Close()
 	return *file
 }
 
 func processError(err error) {
-	Flags.PrintDefaults()
-	log.Fatal(err)
+	flag.PrintDefaults()
+	fmt.Print(err)
 	os.Exit(2)
 }
 
 type Config struct {
-	ApiKey      *string
-	Source      *string
-	Destination *string
-	Descriptor  *string
+	ApiKey      string
+	Source      string
+	Destination string
+	Descriptor  string
 }
 
 func parseArguments() Config {
-	var conf Config
-	conf.ApiKey = flag.String("key", "", "Your GoogleDrive API Key.")
-	conf.Source = flag.String("src", ".", "The source folder to backup.")
-	conf.Destination = flag.String("dest", "/backup", "The GoogleDrive backup destination folder.")
-	conf.Descriptor = flag.String("tag", "", "The descriptor tag which will be included in the filename.")
+	var ApiKey = flag.String("key", "", "Your GoogleDrive API Key.")
+	var Source = flag.String("src", ".", "The source folder to backup.")
+	var Destination = flag.String("dest", "/backup", "The GoogleDrive backup destination folder.")
+	var Descriptor = flag.String("tag", "", "The descriptor tag which will be included in the filename.")
 	flag.Parse()
 
-
-	//if err != nil {
-	//	processError(err)
-	//}
-	//if conf.ApiKey == ""{
-	//	processError(flag.ErrHelp)
-	//}
-
-	return conf
+	return Config{
+		ApiKey:      *ApiKey,
+		Source:      *Source,
+		Destination: *Destination,
+		Descriptor:  *Descriptor,
+	}
 }
 
 // Tar takes a source and variable writers and walks 'source' writing each file
